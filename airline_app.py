@@ -171,14 +171,6 @@ if os.path.exists(json_file):
     all_data = load_data()
     airline_list = sorted(list(all_data.keys()))
 
-# 数据爬取区域
-with st.expander("🔧 数据更新/爬取", expanded=not os.path.exists(json_file)):
-    if st.button("开始爬取航司机队数据", type="primary"):
-        with st.spinner("正在爬取，请耐心等待..."):
-            count = create_csv()
-        st.success(f"✅ 完成！共采集 {count} 条航司链接，数据已保存，请刷新页面加载下拉选项")
-
-st.divider()
 
 # 三个功能标签页
 tab1, tab2, tab3 = st.tabs(["📋 查询航司全部机队", "✈️ 航司+机型查注册号", "🔍 注册号反向查询"])
@@ -224,7 +216,7 @@ with tab2:
 
 # 标签3：注册号反向查询（保留输入框）
 with tab3:
-    st.subheader("输入注册号，反向查航司&机型(注册号无需输入B)")
+    st.subheader("输入注册号，反向查航司&机型(注册号无需输入B,字母要大写)")
     reg_input = st.text_input("输入飞机注册号", placeholder="例如：1083")
     if st.button("查询", key="btn3"):
         if not os.path.exists(json_file):
